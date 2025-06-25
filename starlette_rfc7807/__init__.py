@@ -5,8 +5,14 @@ This package provides middleware and exception handlers for Starlette applicatio
 to generate RFC 7807 compliant problem detail responses.
 """
 
-from .exception import ProblemDetailException
-from .middleware import ProblemDetailMiddleware
+from .exception import Problem
+from .middleware import ProblemMiddleware, http_exception_handler
 
-__version__ = "0.1.0"
-__all__ = ["ProblemDetailException", "ProblemDetailMiddleware"]
+try:
+    from importlib.metadata import version
+
+    __version__ = version("starlette-rfc7807")
+except ImportError:
+    __version__ = "unknown"
+
+__all__ = ["Problem", "http_exception_handler", "ProblemMiddleware"]
